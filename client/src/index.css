@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #FAF8F5;
+  --ink: #1a1714;
+  --muted: #7a7068;
+  --accent: #c9a96e;
+  --accent-light: #f0e8d8;
+  --teal: #5b8c8a;
+  --teal-light: #e8f2f1;
+  --rose: #d4756b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+}
+
+.font-display { font-family: 'Cormorant Garamond', serif; }
+
+.masonry-grid {
+  columns: 5 220px;
+  column-gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .masonry-grid { columns: 2 160px; column-gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .masonry-grid { columns: 2 140px; column-gap: 6px; }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+}
+
+.pin-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.pin-card:hover { transform: translateY(-4px); }
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary:hover { background: #3a3530; }
+
+.btn-outline {
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 9px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+.input-field {
+  width: 100%;
+  border: 1.5px solid #e0dbd4;
+  background: white;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  color: var(--ink);
+}
+.input-field:focus { border-color: var(--accent); }
+
+.overlay-fade {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.pin-card:hover .overlay-fade { opacity: 1; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s ease forwards; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 0.8s linear infinite; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d0cbc4; border-radius: 3px; }
