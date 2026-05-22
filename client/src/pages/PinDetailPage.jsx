@@ -35,7 +35,9 @@ export default function PinDetailPage() {
     try {
       const res = await savePost(post._id);
       updateUser({ savedPosts: res.data.savedPosts });
-    } catch {}
+    } catch (err) {
+      console.error("Save Pin failed:", err.response?.data || err.message);
+    }
     setSaving(false);
   };
 
@@ -44,7 +46,9 @@ export default function PinDetailPage() {
     try {
       const res = await likePost(post._id);
       setPost(p => ({ ...p, likes: res.data.liked ? [...(p.likes||[]), user._id] : p.likes.filter(l => l !== user._id) }));
-    } catch {}
+    } catch (err) {
+      console.error("Like Pin failed:", err.response?.data || err.message);
+    }
   };
 
   const handleComment = async (e) => {
@@ -56,7 +60,9 @@ export default function PinDetailPage() {
       const res = await addComment(post._id, comment);
       setPost(p => ({ ...p, comments: res.data }));
       setComment("");
-    } catch {}
+    } catch (err) {
+      console.error("Comment Pin failed:", err.response?.data || err.message);
+    }
     setCommenting(false);
   };
 

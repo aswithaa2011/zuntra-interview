@@ -19,6 +19,14 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      setUser(null);
+    };
+    window.addEventListener("auth-unauthorized", handleUnauthorized);
+    return () => window.removeEventListener("auth-unauthorized", handleUnauthorized);
+  }, []);
+
   const login = (token, userData) => {
     localStorage.setItem("token", token);
     setUser(userData);

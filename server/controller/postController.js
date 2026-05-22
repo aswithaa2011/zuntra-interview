@@ -82,8 +82,10 @@ export const likePost = async (req, res) => {
 export const savePost = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
     const postId = req.params.id;
-    const idx = user.savedPosts.indexOf(postId);
+    if (!user.savedPosts) user.savedPosts = [];
+    const idx = user.savedPosts.findIndex(id => (id._id || id).toString() === postId);
     if (idx === -1) user.savedPosts.push(postId);
     else user.savedPosts.splice(idx, 1);
     await user.save();

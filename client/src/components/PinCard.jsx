@@ -20,7 +20,9 @@ export default function PinCard({ post, onSaveToggle }) {
       const res = await savePost(post._id);
       updateUser({ savedPosts: res.data.savedPosts });
       onSaveToggle?.();
-    } catch {}
+    } catch (err) {
+      console.error("Save Pin from card failed:", err.response?.data || err.message);
+    }
     setSaving(false);
   };
 
@@ -30,7 +32,9 @@ export default function PinCard({ post, onSaveToggle }) {
     try {
       const res = await likePost(post._id);
       setLikes(res.data.likes);
-    } catch {}
+    } catch (err) {
+      console.error("Like Pin from card failed:", err.response?.data || err.message);
+    }
   };
 
   return (

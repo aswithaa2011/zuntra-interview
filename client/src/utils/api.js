@@ -10,6 +10,17 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("token");
+      window.dispatchEvent(new Event("auth-unauthorized"));
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const registerUser = (data) => api.post("/auth/register", data);
 export const loginUser = (data) => api.post("/auth/login", data);
 export const getMe = () => api.get("/auth/me");

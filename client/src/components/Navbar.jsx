@@ -46,6 +46,7 @@ export default function Navbar({ onSearch, onCategory, activeCategory }) {
               </svg>
               <input
                 className="input-field pl-10 py-2.5 text-sm"
+                style={{ paddingLeft: "40px" }}
                 placeholder="Search pins, ideas..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
